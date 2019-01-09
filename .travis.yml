@@ -5,6 +5,7 @@ matrix:
       before_script:
         - cd back-end
       script:
+        - gradle build --scan -s
         - gradle check --info
         - gradle jacocoTestReport
       before_cache:
