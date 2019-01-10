@@ -2,6 +2,7 @@ dist: xenial
 matrix:
   include:
     - language: java
+      jdk: openjdk8
       before_script:
         - cd back-end
       script:
