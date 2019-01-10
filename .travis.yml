@@ -21,4 +21,4 @@ matrix:
         directories:
           - "node_modules"
       script:
-        - npm test --coverage
+        - npm test --coverage --verbose
