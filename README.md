@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/simkimsia/UtilityBehaviors.png)](https://travis-ci.org/BrianHuf/black-and-white)
+
 # Black and White
 
 Abstract strategy board games. Emphasis is on playing against computer and learning how to play better
