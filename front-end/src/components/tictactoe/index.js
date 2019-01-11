@@ -4,10 +4,10 @@ import "./TicTacToe.css";
 
 class TicTacToe extends React.Component {
   CONFIG_CELL = {
-    X: <i className="huge circle icon" />,
-    O: <i className="huge circle outline icon" />,
+    X: <i className="circle icon" />,
+    O: <i className="circle outline icon" />,
     _: <div />,
-    s: <i className="huge bolt icon" />
+    s: <i className="bolt icon" />
   };
 
   constructor(props) {
@@ -42,7 +42,6 @@ class TicTacToe extends React.Component {
   }
 
   onClickCell(event, index) {
-    console.log("CP1 " + event + " " + index);
     if (index === -1) {
       return;
     }
@@ -54,10 +53,13 @@ class TicTacToe extends React.Component {
   }
 
   render() {
-    const cells = [...this.props.board].map((value, index) =>
-      this.getCell(value, index)
-    );
-    return <div className="tic-tac-toe">{cells}</div>;
+    const cells = Array(9).fill("_");
+    [...this.props.moves].map((value, index) => {
+      cells[value] = index % 2 ? "O" : "X";
+    });
+
+    const board = cells.map((value, index) => this.getCell(value, index));
+    return <div className="tic-tac-toe">{board}</div>;
   }
 }
 

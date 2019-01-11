@@ -1,5 +1,7 @@
 package game.blackandwhite.backend.mcts;
 
+import java.util.stream.LongStream;
+
 public class FixedIterations implements Coordinator {
     private final long numOfIterations;
 
@@ -9,8 +11,6 @@ public class FixedIterations implements Coordinator {
 
     @Override
     public void doRounds(Mcts mcts) {
-        for (int iteration = 0; iteration < numOfIterations; iteration++) {
-            mcts.doOneRound();
-        }
+        LongStream.of(numOfIterations).parallel().forEach(i -> mcts.doOneRound());
     }
 }
