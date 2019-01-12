@@ -4,10 +4,10 @@ import "./TicTacToe.css";
 
 class TicTacToe extends React.Component {
   CONFIG_CELL = {
-    X: <i className="huge circle icon" />,
-    O: <i className="huge circle outline icon" />,
-    _: <div />,
-    s: <i className="huge bolt icon" />
+    X: <svg viewBox="0 0 500 500"><image xlinkHref="/images/p1.svg"/></svg>,
+    O: <svg viewBox="0 0 500 500"><image xlinkHref="/images/p2.svg"/></svg>,
+    _: <svg viewBox="0 0 500 500"><image xlinkHref="/images/selectable.svg"/></svg>,
+    s: <svg viewBox="0 0 500 500"><image xlinkHref="/images/selected.svg"/></svg>,
   };
 
   constructor(props) {
@@ -42,22 +42,29 @@ class TicTacToe extends React.Component {
   }
 
   onClickCell(event, index) {
-    console.log("CP1 " + event + " " + index);
     if (index === -1) {
-      return;
     }
 
     if (index === this.state.selected) {
       index = null;
     }
+
     this.setState({ selected: index });
   }
 
-  render() {
-    const cells = [...this.props.board].map((value, index) =>
+  getBoardFromUrl() {
+    let fullPath = this.props.location.pathname;
+    let rootPath = this.props.match.path;
+    let extraPath = fullPath.substring(rootPath.length + 1, fullPath.length);
+    return extraPath;
+  }
+
+  render() {    
+    let board = this.props.board ||this.getBoardFromUrl();
+    const cells = [...board].map((value, index) =>
       this.getCell(value, index)
     );
-    return <div className="tic-tac-toe">{cells}</div>;
+    return <div className="tic-tac-toe square">{cells}</div>;
   }
 }
 

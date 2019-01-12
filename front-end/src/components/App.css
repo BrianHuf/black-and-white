@@ -1,4 +1,6 @@
 .game {
-  width: 50%;
-  height: 50%;
+  background:darkslategray;
+}
+.square {
+  width: 30vw;
 }

@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import TicTacToe from "./tictactoe/";
 import "./App.css";
@@ -6,12 +7,12 @@ import "./App.css";
 const App = () => {
   let board = "XO_XOX_XO";
   return (
-    <div className="App">
-      <div>Welcome!!</div>
-      <div className="game">
-        <TicTacToe board={board} />
+    <Router>
+      <div className="App">
+        <div>Welcome!!</div>
+        <Route path="/tictactoe" component={TicTacToe} />
       </div>
-    </div>
+    </Router>
   );
 };
 
