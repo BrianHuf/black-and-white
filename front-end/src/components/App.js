@@ -5,7 +5,6 @@ import TicTacToe from "./tictactoe/";
 import "./App.css";
 
 const App = () => {
-  let board = "XO_XOX_XO";
   return (
     <Router>
       <div className="App">
