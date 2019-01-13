@@ -1,13 +1,14 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 
 import "./TicTacToe.css";
 
 class TicTacToe extends React.Component {
   CONFIG_CELL = {
-    X: <svg viewBox="0 0 500 500"><image xlinkHref="/images/p1.svg"/></svg>,
-    O: <svg viewBox="0 0 500 500"><image xlinkHref="/images/p2.svg"/></svg>,
-    _: <svg viewBox="0 0 500 500"><image xlinkHref="/images/selectable.svg"/></svg>,
-    s: <svg viewBox="0 0 500 500"><image xlinkHref="/images/selected.svg"/></svg>,
+    X: <image xlinkHref="/images/p1.svg" />,
+    O: <image xlinkHref="/images/p2.svg" />,
+    _: <image xlinkHref="/images/selectable.svg" />,
+    s: <image xlinkHref="/images/selected.svg" />
   };
 
   constructor(props) {
@@ -36,36 +37,45 @@ class TicTacToe extends React.Component {
         celly={y}
         key={index}
       >
-        {this.CONFIG_CELL[value]}
+        <svg viewBox="0 0 500 500">{this.CONFIG_CELL[value]}</svg>
       </div>
     );
   }
 
   onClickCell(event, index) {
-    if (index === -1) {
-    }
-
     if (index === this.state.selected) {
+      this.props.history.push(`/tictactoe/${this.getCurrentMoves()}${index}`);
       index = null;
     }
 
     this.setState({ selected: index });
   }
 
-  getBoardFromUrl() {
+  getMovesFromUrl() {
     let fullPath = this.props.location.pathname;
     let rootPath = this.props.match.path;
     let extraPath = fullPath.substring(rootPath.length + 1, fullPath.length);
     return extraPath;
   }
 
-  render() {    
-    let board = this.props.board ||this.getBoardFromUrl();
-    const cells = [...board].map((value, index) =>
-      this.getCell(value, index)
-    );
+  getBoardFromMoves(moves) {
+    const board = Array(9).fill("_");
+    [...moves].forEach((value, index) => {
+      board[value] = index % 2 ? "O" : "X";
+    });
+    return board;
+  }
+
+  getCurrentMoves() {
+    return this.props.moves || this.getMovesFromUrl() || "";
+  }
+
+  render() {
+    const moves = this.getCurrentMoves();
+    const board = this.getBoardFromMoves(moves);
+    const cells = board.map((value, index) => this.getCell(value, index));
     return <div className="tic-tac-toe square">{cells}</div>;
   }
 }
 
-export default TicTacToe;
+export default withRouter(TicTacToe);

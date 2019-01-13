@@ -1,6 +1,21 @@
-.game {
-  background:darkslategray;
+.App {
+  width: 40vw;
+  height: 40vw;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin: auto;
+
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+  -moz-user-select: none; /* mozilla browsers */
+  -khtml-user-select: none; /* webkit (konqueror) browsers */
+  -ms-user-select: none; /* IE10+ */
 }
-.square {
-  width: 30vw;
+
+.game {
+  background: darkslategray;
 }
