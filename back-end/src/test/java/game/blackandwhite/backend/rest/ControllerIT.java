@@ -21,18 +21,18 @@ import org.springframework.test.web.servlet.ResultActions;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = App.class)
 
 @AutoConfigureMockMvc
-public class TicTacToeControllerIT {
+public class ControllerIT {
     @Autowired
     private MockMvc mvc;
 
     @Test
     public void test() throws Exception {
         System.out.println("Hello world");
-        final String url = "/api/v1/tictactoe/movesToState/012";
+        final String url = "/api/v1/movesToState?game=tictactoe&moves=012";
 
         ResultActions a = mvc.perform(get(url).contentType(MediaType.APPLICATION_JSON));
         a.andExpect(status().isOk());
         a.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
-        a.andExpect(jsonPath("state", is("X__OXO_XO")));
+        a.andExpect(jsonPath("state", is("XOX______")));
     }
 }
