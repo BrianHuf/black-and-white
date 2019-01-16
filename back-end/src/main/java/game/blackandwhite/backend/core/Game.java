@@ -1,7 +1,6 @@
 package game.blackandwhite.backend.core;
 
 public interface Game {
-    State getState();
-
+    Move getLastMove();
     void playMove(Move move);
 }

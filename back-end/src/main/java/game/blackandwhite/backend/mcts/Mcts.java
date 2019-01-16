@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import game.blackandwhite.backend.core.Move;
-import game.blackandwhite.backend.core.State;
 
 public class Mcts {
     private static Logger logger = LoggerFactory.getLogger(Mcts.class);
@@ -33,8 +32,8 @@ public class Mcts {
         this.propagator = propagator;
     }
 
-    public Move findBest(State state) {
-        root = new Node(state);
+    public Move findBest(Move fromMove) {
+        root = new Node(fromMove);
         coordinator.doRounds(this);
         logger.info("MCTS", toString());
         return selectByMostVisits(root.getChildren()).getMove();

@@ -1,7 +1,6 @@
 package game.blackandwhite.backend.mcts;
 
 import game.blackandwhite.backend.core.Move;
-import game.blackandwhite.backend.core.State;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +12,11 @@ class Node {
     private int visits = 0;
     private float goodness = 0;
 
-    public Node(State state) {
+    public Node(Move startingMove) {
         parent = null;
         move = null;
 
-        for (Move move : state.getAvailableMoves()) {
+        for (Move move : startingMove.getNextMoves()) {
             addNode(move);
         }
     }
@@ -26,7 +25,6 @@ class Node {
         parent.children.add(this);
         this.parent = parent;
         this.move = move;
-        move.duplicateStateAndApply();
     }
 
     public Move getMove() {
@@ -35,7 +33,7 @@ class Node {
 
     public void expand() {
         if (children.isEmpty()) {
-            for (Move nextMove : move.getCreatedState().getAvailableMoves()) {
+            for (Move nextMove : move.getNextMoves()) {
                 addNode(nextMove);
             }
         }

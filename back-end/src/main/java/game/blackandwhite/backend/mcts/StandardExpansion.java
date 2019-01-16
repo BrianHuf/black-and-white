@@ -7,7 +7,7 @@ import static game.blackandwhite.backend.core.RandomSelector.randomSelect;
 class StandardExpansion implements Expander {
     @Override
     public Node expand(Node selected) {
-        if (selected.getVisits() == 0 || !selected.getMove().getCreatedState().isActive()) {
+        if (selected.getVisits() == 0 || selected.getMove().getStatus().isGameOver()) {
             return selected;
         }
 

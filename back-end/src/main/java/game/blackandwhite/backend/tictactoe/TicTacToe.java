@@ -1,34 +1,49 @@
 package game.blackandwhite.backend.tictactoe;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import game.blackandwhite.backend.core.Game;
 import game.blackandwhite.backend.core.Move;
-import game.blackandwhite.backend.core.State;
 
 public class TicTacToe implements Game {
-    private static Logger logger = LoggerFactory.getLogger(TicTacToe.class);
+    TicTacToeMove lastMove;
 
-    State currentState;
-
-    public TicTacToe() {
-        currentState = new T3State();
+    public TicTacToe(String moves) {
+        this();
+        playMoves(moves);
     }
 
-    @Override
-    public State getState() {
-        return currentState;
+    public TicTacToe() {
+        lastMove = new TicTacToeMove();
+    }
+
+    private void playMoves(String moves) {
+        for (byte moveChar : moves.getBytes()) {
+            playMoveChar(moveChar - 48);
+        }
+    }
+
+    private void playMoveChar(int cell) {
+        lastMove = new TicTacToeMove(lastMove, cell);
     }
 
     @Override
     public void playMove(Move move) {
-        logger.info("play move {}", move);
-        currentState = move.duplicateStateAndApply();
-        logger.info("play move {} done");
+        if (! (move instanceof TicTacToeMove)) {
+            throw new IllegalArgumentException("Expecting only a TicTacToeMove");
+        }
+
+        lastMove = (TicTacToeMove)move;
+    }
+
+    @Override
+    public Move getLastMove() {
+        return lastMove;
+    }
+
+    public TicTacToeMove getLastTicTacToeMove() {
+        return lastMove;
     }
 
     public String toString() {
-        return currentState.toString();
+        return lastMove.toString();
     }
 }

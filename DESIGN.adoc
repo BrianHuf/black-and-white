@@ -1,0 +1,39 @@
+Generic Game Interface
+======================
+
+[plantuml]
+:plantuml-server-url: http://subwcl608.na.mscsoftware.com:8082
+....
+@startuml
+
+MCTS *-- Game
+Game *-- Move
+Move *-- Move
+
+Game : void play(Move m)
+Game : Move getLastMove()
+
+Move : <Optional> getPreviousMove()
+Move : Collection<Move> getNextMoves()
+Move : Status getGameStatus()
+
+@enduml
+....
+
+
+MCTS
+~~~~
+Monte Carlo Tree Search is the basis for the computer AI.  Random moves are played out and the best move is selected to be played.  Moving foward, the random moves will be biased using Machine Learning
+
+
+Game
+~~~~
+A particular game in-progress or completed.  It's only state is a reference to the last move.  At the beginning of a game, the first move is always a "Begin Game" move.
+
+Move
+~~~~
+A particular move taken by a player that progresses the game.
+
+Status
+~~~~~~
+An enumeration:  InProgress, Winner, Loser, Tied
