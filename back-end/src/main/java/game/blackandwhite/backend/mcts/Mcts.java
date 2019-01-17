@@ -2,15 +2,10 @@ package game.blackandwhite.backend.mcts;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import game.blackandwhite.backend.core.AI;
 import game.blackandwhite.backend.core.Move;
 
 public class Mcts implements AI {
-    private static Logger logger = LoggerFactory.getLogger(Mcts.class);
-
     private Coordinator coordinator;
     private Selector selector;
     private Expander expander;
@@ -49,6 +44,7 @@ public class Mcts implements AI {
                 maxVisits = check.getVisits();
             }
         }
+        
         return maxNode;
     }
 

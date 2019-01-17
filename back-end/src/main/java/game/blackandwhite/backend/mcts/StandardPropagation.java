@@ -1,15 +1,15 @@
 package game.blackandwhite.backend.mcts;
 
+import game.blackandwhite.backend.core.Player;
+
 class StandardPropagation implements Propagator {
     @Override
     public void backPropagate(Node node, float goodness) {
+        Player startingPlayer = node.getMove().getPlayer();
         for (Node current = node; current != null; current = current.getParent()) {
-            if (current.isRoot()) {
-                goodness = 1.0f - goodness;
-            }
-            current.addGoodness(goodness);
-            goodness = 1.0f - goodness;
+            Player currentPlayer = current.getMove().getPlayer();
+            float currentGoodness = current.isRoot() || currentPlayer.equals(startingPlayer) ? goodness : -goodness;
+            current.addGoodness(currentGoodness);
         }
-
     }
 }

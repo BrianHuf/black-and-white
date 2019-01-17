@@ -26,12 +26,13 @@ public class TicTacToe implements Game {
     }
 
     @Override
-    public void playMove(Move move) {
+    public Game playMove(Move move) {
         if (! (move instanceof TicTacToeMove)) {
             throw new IllegalArgumentException("Expecting only a TicTacToeMove");
         }
 
         lastMove = (TicTacToeMove)move;
+        return this;
     }
 
     @Override
@@ -44,6 +45,12 @@ public class TicTacToe implements Game {
     }
 
     public String toString() {
-        return lastMove.toString();
+        StringBuilder sb = new StringBuilder();
+        TicTacToeMove current = lastMove;
+        while(current.getPreviousMove().isPresent()) {
+            sb.insert(0, Integer.toString(current.getCell()));
+            current = current.getPreviousT3Move();
+        }
+        return sb.toString();
     }
 }

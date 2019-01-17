@@ -14,7 +14,7 @@ class Node {
 
     public Node(Move startingMove) {
         parent = null;
-        move = null;
+        move = startingMove;
 
         for (Move move : startingMove.getNextMoves()) {
             addNode(move);
@@ -25,6 +25,19 @@ class Node {
         parent.children.add(this);
         this.parent = parent;
         this.move = move;
+    }
+
+    public Node getFirstLevel() {
+        if (isRoot()) {
+            throw new IllegalStateException("getFirstLevel() is called from root -- not allowed");
+        }
+
+        Node current = this;
+        while(!current.getParent().isRoot()) {
+            current = current.getParent();
+        }
+
+        return current;
     }
 
     public Move getMove() {

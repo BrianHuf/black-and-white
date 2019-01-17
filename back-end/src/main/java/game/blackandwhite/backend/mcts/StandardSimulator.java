@@ -2,20 +2,20 @@ package game.blackandwhite.backend.mcts;
 
 import game.blackandwhite.backend.core.Move;
 import game.blackandwhite.backend.core.Player;
-
 import static game.blackandwhite.backend.mcts.RandomSelector.randomSelect;
 
 class StandardSimulator implements Simulator {
     private static float WINNER = 1.0f;
-    private static float LOSER = 0.0f;
-    private static float TIE = 0.5f;
+    private static float LOSER = -1.0f;
+    private static float TIE = 0.0f;
 
     @Override
     public float playout(Node node) {
         Move startingMove = node.getMove();
         Player startingPlayer = startingMove.getPlayer();
         Move finalMove = playout(startingMove);
-        return goodness(finalMove, startingPlayer);
+        float ret = goodness(finalMove, startingPlayer);
+        return ret;
     }
 
     private Move playout(Move startingMove) {
@@ -23,6 +23,7 @@ class StandardSimulator implements Simulator {
         while(currentMove.getStatus().isInProgress()) {
             currentMove = randomSelect(currentMove.getNextMoves());
         }
+        
         return currentMove;
     }
 
