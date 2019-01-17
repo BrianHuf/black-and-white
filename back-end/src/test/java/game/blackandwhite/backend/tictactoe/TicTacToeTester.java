@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import game.blackandwhite.backend.core.Moves;
+import game.blackandwhite.backend.core.Move;
 
 public class TicTacToeTester {
     private static Logger logger = LoggerFactory.getLogger(TicTacToe.class);
@@ -23,8 +23,8 @@ public class TicTacToeTester {
         TicTacToe sut = new TicTacToe("012345");
         assertEquals("O5 -- XOXOXO___", sut.toString());
 
-        Moves moves = sut.lastMove.getNextMoves();
-        assertEquals(3, moves.size());
+        Move[] moves = sut.lastMove.getNextMoves();
+        assertEquals(3, moves.length);
     }
 
     @Test
@@ -32,7 +32,7 @@ public class TicTacToeTester {
         TicTacToe sut = new TicTacToe("012345");
         assertEquals("O5 -- XOXOXO___", sut.toString());
 
-        Moves moves = sut.lastMove.getNextMoves();
-        assertEquals(3, moves.size());
+        Move[] moves = sut.lastMove.getNextMoves();
+        assertEquals(3, moves.length);
     }
 }

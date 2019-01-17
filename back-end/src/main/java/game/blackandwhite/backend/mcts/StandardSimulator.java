@@ -1,49 +1,43 @@
 package game.blackandwhite.backend.mcts;
 
-// import game.blackandwhite.backend.core.Move;
-// import game.blackandwhite.backend.core.Moves;
-// import game.blackandwhite.backend.core.Player;
+import game.blackandwhite.backend.core.Move;
+import game.blackandwhite.backend.core.Player;
 
-// import java.util.List;
-
-// import static game.blackandwhite.backend.core.RandomSelector.randomSelect;
+import static game.blackandwhite.backend.mcts.RandomSelector.randomSelect;
 
 class StandardSimulator implements Simulator {
-    // private static float WINNER = 1.0f;
-    // private static float LOSER = 0.0f;
-    // private static float TIE = 0.5f;
-
-    // Player startingPlayer;
+    private static float WINNER = 1.0f;
+    private static float LOSER = 0.0f;
+    private static float TIE = 0.5f;
 
     @Override
     public float playout(Node node) {
-        // State originalState = node.getMove().getCreatingState();
-        // startingPlayer = originalState.getPlayersTurn();
-
-        // Move move = randomSelect((List<Move>) originalState.getAvailableMoves());
-        // State mutableState = move.duplicateStateAndApply();
-        // while (mutableState.isActive()) {
-        //     selectRandomMove(mutableState).applyToCreatingState();
-        // }
-
-        // return calculateGoodness(mutableState);
-        return 0.5f;
+        Move startingMove = node.getMove();
+        Player startingPlayer = startingMove.getPlayer();
+        Move finalMove = playout(startingMove);
+        return goodness(finalMove, startingPlayer);
     }
 
-    // private float calculateGoodness(State mutableState) {
-    //     Player winningPlayer = mutableState.getWinner();
-    //     if (winningPlayer == null) {
-    //         return TIE;
-    //     } else if (startingPlayer.equals(winningPlayer)) {
-    //         return WINNER;
-    //     } else {
-    //         return LOSER;
-    //     }
-    // }
+    private Move playout(Move startingMove) {
+        Move currentMove = startingMove;
+        while(currentMove.getStatus().isInProgress()) {
+            currentMove = randomSelect(currentMove.getNextMoves());
+        }
+        return currentMove;
+    }
 
-    // private Move selectRandomMove(State state) {
-    //     Moves moves = state.getAvailableMoves();
-    //     return randomSelect((List<Move>) moves);
-    // }
+    private float goodness(Move finalMove, Player startingPlayer) {
+        Player finalPlayer = finalMove.getPlayer();
+        switch(finalMove.getStatus()) {
+            case WINNER:
+                return finalPlayer.equals(startingPlayer) ? WINNER : LOSER;
+            case LOSER:
+                return finalPlayer.equals(startingPlayer) ? LOSER : WINNER;
+            case TIE:
+                return TIE;
+            default:
+                throw new IllegalStateException();
+        }
+    }
 }
 

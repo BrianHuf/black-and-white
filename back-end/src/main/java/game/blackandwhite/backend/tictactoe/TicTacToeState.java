@@ -1,8 +1,10 @@
 package game.blackandwhite.backend.tictactoe;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-import game.blackandwhite.backend.core.Moves;
+import game.blackandwhite.backend.core.Move;
 import game.blackandwhite.backend.core.Status;
 
 public class TicTacToeState {
@@ -10,7 +12,8 @@ public class TicTacToeState {
     private final int[] board;
     private final TicTacToeMove move;
 
-    Status status = null;
+    Status status;
+    Move[] nextMoves;
 
     TicTacToeState(TicTacToeMove move) {
         this.move = move;
@@ -19,11 +22,11 @@ public class TicTacToeState {
             board = new int[9];
         } else {
             board = Arrays.copyOf(move.getPreviousT3Move().getState().board, 9);
-            board[move.getCell()] = move.getPlayer();
+            board[move.getCell()] = move.getPlayer().getIndex();
         }
     }
     
-    public Status getStatus() {
+    synchronized public Status getStatus() {
         if (status == null) {
             status = calcStatus();
         }
@@ -32,7 +35,7 @@ public class TicTacToeState {
     }
 
     private Status calcStatus() {    
-        int lookFor = move.getPlayer();
+        int lookFor = move.getPlayer().getIndex();
         if (check(lookFor, 0) && (check(lookFor, 1, 2) || check(lookFor, 3, 6) || check(lookFor, 4, 8))) {
             return Status.WINNER;
         }
@@ -68,24 +71,33 @@ public class TicTacToeState {
         return lookFor == board[index1] && lookFor == board[index2] && lookFor == board[index3];
     }
 
-	public Moves getNextMoves() {
-        Moves moves = new Moves();
+    synchronized public Move[] getNextMoves() {
+        if (nextMoves == null) {
+            nextMoves = calcNextMoves();
+        }
+
+        return nextMoves;
+    }
+
+	public Move[] calcNextMoves() {
+        List<Move> moves = new ArrayList<>(9);
         for(int i=0;i<9;i++) {
             checkToAddMove(moves, i);
         }
-        return moves;
+
+        return moves.toArray(new Move[moves.size()]);
     }
 
-    private void checkToAddMove(Moves moves, int i) {
+    private void checkToAddMove(List<Move> moves, int i) {
         if (board[i] == 0) {
-            moves.add(new TicTacToeMove(move, (byte)i));
+            moves.add(new TicTacToeMove(move, i));
         }
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for(int cell : board) {
-            sb.append(PIECES[(int)cell]);
+            sb.append(PIECES[cell]);
         }
         
         return sb.toString();

@@ -3,7 +3,8 @@ package game.blackandwhite.backend.core;
 import java.util.Optional;
 
 public interface Move {
+    Player getPlayer();
     Optional<Move> getPreviousMove();
-    Moves getNextMoves();
+    Move[] getNextMoves();
     Status getStatus();
 }

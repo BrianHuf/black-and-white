@@ -3,7 +3,7 @@ package game.blackandwhite.backend.tictactoe;
 import java.util.Optional;
 
 import game.blackandwhite.backend.core.Move;
-import game.blackandwhite.backend.core.Moves;
+import game.blackandwhite.backend.core.Player;
 import game.blackandwhite.backend.core.Status;
 
 public class TicTacToeMove implements Move {
@@ -23,6 +23,15 @@ public class TicTacToeMove implements Move {
         this.cell = cell;
         this.moveNumber = previous.moveNumber + 1;
     }
+    
+    @Override
+    public Player getPlayer() {
+        if (isBeginGame()) { 
+            return Player.NOBODY;
+        }
+
+        return moveNumber % 2 == 1 ? Player.P1 : Player.P2;
+    }
 
     @Override
     public Optional<Move> getPreviousMove() {
@@ -34,8 +43,8 @@ public class TicTacToeMove implements Move {
     }
 
     @Override
-    public Moves getNextMoves() {
-        return getState().getNextMoves();        
+    public Move[] getNextMoves() {
+        return getState().getNextMoves();
     }
 
 	@Override
@@ -55,10 +64,6 @@ public class TicTacToeMove implements Move {
         return cell;
     }
 
-    int getPlayer() {
-        return (byte) (moveNumber % 2 == 1 ? 1 : 2);
-    }
-
     int getMoveNumber() {
         return this.moveNumber;
     }
@@ -67,7 +72,7 @@ public class TicTacToeMove implements Move {
         return moveNumber == 0;
     }
 
-    TicTacToeState getState() {
+    synchronized TicTacToeState getState() {
         if (state == null) {
             state =new TicTacToeState(this);            
         }
@@ -79,7 +84,6 @@ public class TicTacToeMove implements Move {
             return getState().toString();
         }
         
-        String player = getPlayer() == 1 ? "X" : "O";
-        return player + Integer.toString(cell) + " -- " + getState().toString();
+        return getPlayer().toString() + Integer.toString(cell) + " -- " + getState().toString();
     }
 }

@@ -12,4 +12,20 @@ public enum Status {
     public boolean isGameOver() {
         return isGameOver;
     }
+
+    public boolean isInProgress() {
+        return !isGameOver();
+    }
+
+	public boolean isTie() {
+		return equals(TIE);
+    }
+    
+	public boolean isWinner() {
+		return equals(WINNER);
+    }
+    
+	public boolean isLoser() {
+		return equals(LOSER);
+	}
 }

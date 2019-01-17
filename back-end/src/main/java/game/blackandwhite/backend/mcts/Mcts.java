@@ -5,9 +5,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import game.blackandwhite.backend.core.AI;
 import game.blackandwhite.backend.core.Move;
 
-public class Mcts {
+public class Mcts implements AI {
     private static Logger logger = LoggerFactory.getLogger(Mcts.class);
 
     private Coordinator coordinator;
@@ -32,10 +33,10 @@ public class Mcts {
         this.propagator = propagator;
     }
 
-    public Move findBest(Move fromMove) {
+    @Override
+    public Move findBestMove(Move fromMove) {
         root = new Node(fromMove);
         coordinator.doRounds(this);
-        logger.info("MCTS", toString());
         return selectByMostVisits(root.getChildren()).getMove();
     }
 

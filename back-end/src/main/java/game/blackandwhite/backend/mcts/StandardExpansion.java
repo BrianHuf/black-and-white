@@ -2,7 +2,7 @@ package game.blackandwhite.backend.mcts;
 
 import java.util.List;
 
-import static game.blackandwhite.backend.core.RandomSelector.randomSelect;
+import static game.blackandwhite.backend.mcts.RandomSelector.randomSelect;
 
 class StandardExpansion implements Expander {
     @Override

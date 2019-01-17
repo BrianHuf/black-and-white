@@ -1,8 +1,6 @@
 package game.blackandwhite.backend.mcts;
 
-import game.blackandwhite.backend.core.WeightGetter;
-
-import static game.blackandwhite.backend.core.WeightedRandomSelector.weightedSelect;
+import static game.blackandwhite.backend.mcts.WeightedRandomSelector.weightedSelect;
 
 class StandardSelection implements Selector, WeightGetter<Node> {
     private static float C = (float) Math.sqrt(2);

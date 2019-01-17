@@ -11,6 +11,8 @@ public class FixedIterations implements Coordinator {
 
     @Override
     public void doRounds(Mcts mcts) {
-        LongStream.of(numOfIterations).parallel().forEach(i -> mcts.doOneRound());
+        LongStream.range(0, numOfIterations).forEach(i -> mcts.doOneRound());
+        // FIXME fix java.util.ConcurrentModificationException
+         //LongStream.range(0, numOfIterations).parallel().forEach(i -> mcts.doOneRound());
     }
 }

@@ -1,4 +1,4 @@
-package game.blackandwhite.backend.core;
+package game.blackandwhite.backend.mcts;
 
 import java.util.List;
 
@@ -44,6 +44,7 @@ public class WeightedRandomSelector<T> {
                 return objects[i];
             }
         }
-        throw new IllegalStateException("unexpected internal error");
+        
+        return objects[objects.length-1];
     }
 }
