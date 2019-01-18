@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/simkimsia/UtilityBehaviors.png)](https://travis-ci.org/BrianHuf/black-and-white)
+[![Coverage Status](https://coveralls.io/repos/github/BrianHuf/black-and-white/badge.svg?branch=master)](https://coveralls.io/github/BrianHuf/black-and-white?branch=master)
+
 
 # Black and White
 
