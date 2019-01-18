@@ -15,13 +15,13 @@ public class TicTacToeTester {
     public void constructor_begin_successful() {
         logger.info("TEST");
         TicTacToe sut = new TicTacToe();
-        assertEquals("_________", sut.toString());
+        assertEquals("_________", sut.getLastMove().toString());
     }
 
     @Test
     public void constructor_midPlay_successful() {
         TicTacToe sut = new TicTacToe("012345");
-        assertEquals("O5 -- XOXOXO___", sut.toString());
+        assertEquals("O5 -- XOXOXO___", sut.getLastMove().toString());
 
         Move[] moves = sut.lastMove.getNextMoves();
         assertEquals(3, moves.length);
@@ -30,7 +30,7 @@ public class TicTacToeTester {
     @Test
     public void getStatus_midPlay_successful() {
         TicTacToe sut = new TicTacToe("012345");
-        assertEquals("O5 -- XOXOXO___", sut.toString());
+        assertEquals("O5 -- XOXOXO___", sut.getLastMove().toString());
 
         Move[] moves = sut.lastMove.getNextMoves();
         assertEquals(3, moves.length);
