@@ -13,7 +13,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "coverage": "react-scripts test --coverage",
-    "coveralls": "cat ./coverage/lcov.info | ./node node_modules/.bin/coveralls",
+    "coveralls": "cat ./coverage/lcov.info | node ./node_modules/.bin/coveralls",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
