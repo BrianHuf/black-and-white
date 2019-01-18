@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="game.blackandwhite.backend.mcts.MctsTester" tests="5" skipped="0" failures="0" errors="0" timestamp="2019-01-18T16:19:04" hostname="eye9" time="0.146">
+  <properties/>
+  <testcase name="ticTacToeTakeWinning" classname="game.blackandwhite.backend.mcts.MctsTester" time="0.012"/>
+  <testcase name="testGame1" classname="game.blackandwhite.backend.mcts.MctsTester" time="0.007"/>
+  <testcase name="testGame2" classname="game.blackandwhite.backend.mcts.MctsTester" time="0.063"/>
+  <testcase name="ticTacToe" classname="game.blackandwhite.backend.mcts.MctsTester" time="0.055"/>
+  <testcase name="ticTacToeBlockWinning" classname="game.blackandwhite.backend.mcts.MctsTester" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="game.blackandwhite.backend.tictactoe.TicTacToeTester" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-01-18T16:19:04" hostname="eye9" time="0.012">
+  <properties/>
+  <testcase name="getStatus_midPlay_successful" classname="game.blackandwhite.backend.tictactoe.TicTacToeTester" time="0.004"/>
+  <testcase name="constructor_midPlay_successful" classname="game.blackandwhite.backend.tictactoe.TicTacToeTester" time="0.001"/>
+  <testcase name="constructor_begin_successful" classname="game.blackandwhite.backend.tictactoe.TicTacToeTester" time="0.007"/>
+  <system-out><![CDATA[08:19:04.969 [Test worker] INFO game.blackandwhite.backend.tictactoe.TicTacToe - TEST
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

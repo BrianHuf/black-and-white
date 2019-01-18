@@ -14,11 +14,14 @@ matrix:
     - language: node_js
       node_js:
         - "node"
+      cache:
+        directories:
+          - "node_modules"        
       before_script:
         - cd front-end
         - npm install
-      cache:
-        directories:
-          - "node_modules"
       script:
-        - npm test --coverage --verbose
+        - npm test -- --coverage --verbose
+        # - npm run build
+      after_script:
+        - npm run coveralls

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="game.blackandwhite.backend.tictactoe.TicTacToeMoveTester" tests="5" skipped="0" failures="0" errors="0" timestamp="2019-01-18T16:19:08" hostname="eye9" time="0.001">
+  <properties/>
+  <testcase name="getStatus_inProgress" classname="game.blackandwhite.backend.tictactoe.TicTacToeMoveTester" time="0.0"/>
+  <testcase name="constructor" classname="game.blackandwhite.backend.tictactoe.TicTacToeMoveTester" time="0.0"/>
+  <testcase name="getStatus_tied" classname="game.blackandwhite.backend.tictactoe.TicTacToeMoveTester" time="0.0"/>
+  <testcase name="getStatus_winnerX" classname="game.blackandwhite.backend.tictactoe.TicTacToeMoveTester" time="0.0"/>
+  <testcase name="getStatus_winnerY" classname="game.blackandwhite.backend.tictactoe.TicTacToeMoveTester" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

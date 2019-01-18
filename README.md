@@ -6,7 +6,7 @@
 
 Abstract strategy board games. Emphasis is on playing against computer and learning how to play better
 
-This is side-project primarily for learning
+This is a side-project primarily for learning
 
 ## Status
 
