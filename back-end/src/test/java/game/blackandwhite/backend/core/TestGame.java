@@ -19,11 +19,16 @@ public class TestGame implements Game {
         return this;
     }
 
+    @Override
+    public String getPlayedMoves() {
+        return "<not implemented>";
+    }
+
     public static Status exampleGetMoveStatus(TestMove m) {
         if (m.moveNumber < 5) {
             return Status.IN_PROGRESS;
         }
-    
+
         int[] moves = m.getAllMoveCells();
         return moves[0] == 0 ? Status.WINNER : Status.TIE;
     }
@@ -34,10 +39,10 @@ public class TestGame implements Game {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        TestMove current = (TestMove)lastMove;
-        while(current.getPreviousMove().isPresent()) {
+        TestMove current = (TestMove) lastMove;
+        while (current.getPreviousMove().isPresent()) {
             sb.insert(0, Integer.toString(current.cell));
-            current = (TestMove)current.getPreviousMove().get();
+            current = (TestMove) current.getPreviousMove().get();
         }
         return sb.toString();
     }

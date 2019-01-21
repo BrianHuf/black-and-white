@@ -15,7 +15,7 @@ public class TicTacToeTester {
     public void constructor_begin_successful() {
         logger.info("TEST");
         TicTacToe sut = new TicTacToe();
-        assertEquals("_________", sut.getLastMove().toString());
+        assertEquals("_________", sut.getLastMove().getBoard());
     }
 
     @Test

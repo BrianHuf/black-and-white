@@ -18,10 +18,10 @@ public class TestMove implements Move {
         this.cell = cell;
         this.moveNumber = previous.moveNumber + 1;
     }
-    
+
     @Override
     public Player getPlayer() {
-        if (previous == null) { 
+        if (previous == null) {
             return Player.NOBODY;
         }
 
@@ -31,7 +31,7 @@ public class TestMove implements Move {
     @Override
     public Optional<Move> getPreviousMove() {
         if (previous != null) {
-            return Optional.of(previous);            
+            return Optional.of(previous);
         }
 
         return Optional.empty();
@@ -40,16 +40,30 @@ public class TestMove implements Move {
     @Override
     public Move[] getNextMoves() {
         TestMove[] moves = new TestMove[TestGame.getNumMoves.apply(this)];
-        for(int i=0;i<moves.length;i++) {
+        for (int i = 0; i < moves.length; i++) {
             moves[i] = new TestMove(this, i);
         }
 
         return moves;
     }
 
-	@Override
-	public Status getStatus() {
-        return TestGame.getMoveStatus.apply(this);        
+    @Override
+    public Status getStatus() {
+        return TestGame.getMoveStatus.apply(this);
+    }
+
+    @Override
+    public String toString() {
+        if (previous == null) {
+            return "begin test game";
+        }
+
+        return String.format("Step %d / Move %d", moveNumber, cell);
+    }
+
+    @Override
+    public String getBoard() {
+        return "<not implemented>";
     }
 
     public int[] getAllMoveCells() {
@@ -57,8 +71,8 @@ public class TestMove implements Move {
 
         TestMove check = this;
         int index = 1;
-        while(check.previous != null) {
-            moves[moveNumber-index] = check.cell;
+        while (check.previous != null) {
+            moves[moveNumber - index] = check.cell;
             check = check.previous;
             index++;
         }
@@ -66,20 +80,8 @@ public class TestMove implements Move {
         return moves;
     }
 
-    private TestMove getFirstMove() {
-        TestMove check = this;
-        while(check.previous.previous != null) {
-            check = check.previous;
-        }
-
-        return check;
-    }
-
-    public String toString() {
-        if (previous == null) {
-            return "begin test game";
-        }
-        
-        return String.format("Step %d / Move %d", moveNumber, cell);
+    @Override
+    public String getMoveString() {
+        return Integer.toString(cell);
     }
 }

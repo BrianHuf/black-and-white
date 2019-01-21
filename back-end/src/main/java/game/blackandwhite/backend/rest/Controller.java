@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Controller {
     @RequestMapping("/api/v1/movesToState")
-    public TicTacToeState movesToState(@RequestParam(value="game", defaultValue="tictactoe") String game, @RequestParam(value = "moves", defaultValue = "") String moves) {
-        return new TicTacToeState(moves);
+    public GameState movesToState(@RequestParam(value = "game", defaultValue = "tictactoe") String gameType,
+            @RequestParam(value = "moves", defaultValue = "") String moves) {
+
+        return new GameState(GameFactory.create(gameType, moves));
     }
 }

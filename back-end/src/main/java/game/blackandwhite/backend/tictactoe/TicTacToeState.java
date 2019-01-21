@@ -25,8 +25,8 @@ public class TicTacToeState {
             board[move.getCell()] = move.getPlayer().getIndex();
         }
     }
-    
-    synchronized public Status getStatus() {
+
+    public Status getStatus() {
         if (status == null) {
             status = calcStatus();
         }
@@ -34,7 +34,7 @@ public class TicTacToeState {
         return status;
     }
 
-    private Status calcStatus() {    
+    private Status calcStatus() {
         int lookFor = move.getPlayer().getIndex();
         if (check(lookFor, 0) && (check(lookFor, 1, 2) || check(lookFor, 3, 6) || check(lookFor, 4, 8))) {
             return Status.WINNER;
@@ -66,7 +66,7 @@ public class TicTacToeState {
     private boolean check(int lookFor, int index1, int index2) {
         return lookFor == board[index1] && lookFor == board[index2];
     }
-    
+
     private boolean check(int lookFor, int index1, int index2, int index3) {
         return lookFor == board[index1] && lookFor == board[index2] && lookFor == board[index3];
     }
@@ -79,9 +79,9 @@ public class TicTacToeState {
         return nextMoves;
     }
 
-	public Move[] calcNextMoves() {
+    public Move[] calcNextMoves() {
         List<Move> moves = new ArrayList<>(9);
-        for(int i=0;i<9;i++) {
+        for (int i = 0; i < 9; i++) {
             checkToAddMove(moves, i);
         }
 
@@ -96,10 +96,10 @@ public class TicTacToeState {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(int cell : board) {
+        for (int cell : board) {
             sb.append(PIECES[cell]);
         }
-        
+
         return sb.toString();
     }
 }

@@ -19,7 +19,7 @@ public class TicTacToeMoveTester {
 
     @Test
     public void getStatus_inProgress() {
-        TicTacToe game = new TicTacToe("012345");        
+        TicTacToe game = new TicTacToe("012345");
         TicTacToeMove move = game.getLastTicTacToeMove();
         assertEquals(Status.IN_PROGRESS, move.getStatus());
     }
@@ -30,20 +30,28 @@ public class TicTacToeMoveTester {
         TicTacToeMove move = game.getLastTicTacToeMove();
         assertEquals(Status.TIE, move.getStatus());
     }
-    
+
     @Test
     public void getStatus_winnerX() {
-        TicTacToe game = new TicTacToe("03142");
-        TicTacToeMove move = game.getLastTicTacToeMove();
-        assertEquals(Status.WINNER, move.getStatus());
-        assertEquals(1, move.getPlayer().getIndex());
+        final String[] winnerX = { "03142", "30415", "60718", "01346", "12457", "21538", "01468", "21456" };
+
+        for (String gameStr : winnerX) {
+            TicTacToe game = new TicTacToe(gameStr);
+            TicTacToeMove move = game.getLastTicTacToeMove();
+            assertEquals("Last move win game " + gameStr, Status.WINNER, move.getStatus());
+            assertEquals("X should be the winning player", 1, move.getPlayer().getIndex());
+        }
     }
-    
+
     @Test
     public void getStatus_winnerY() {
-        TicTacToe game = new TicTacToe("803142");
-        TicTacToeMove move = game.getLastTicTacToeMove();
-        assertEquals(Status.WINNER, move.getStatus());
-        assertEquals(2, move.getPlayer().getIndex());
+        final String[] winnerX = { "803142", "830415", "360718", "801346", "812457", "721538", "701468", "821456" };
+
+        for (String gameStr : winnerX) {
+            TicTacToe game = new TicTacToe(gameStr);
+            TicTacToeMove move = game.getLastTicTacToeMove();
+            assertEquals("Last move win game " + gameStr, Status.WINNER, move.getStatus());
+            assertEquals("Y should be the winning player", 2, move.getPlayer().getIndex());
+        }
     }
 }
