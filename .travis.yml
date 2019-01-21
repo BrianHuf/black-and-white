@@ -2,25 +2,25 @@ dist: xenial
 matrix:
   include:
     - language: java
-        jdk: openjdk8
-        before_cache:
-          - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-          - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-        before_script:
-          - cd back-end
-        script:
-          - gradle check --info
-          - gradle jacocoTestReport coveralls
+      jdk: openjdk8
+      before_cache:
+        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      before_script:
+        - cd back-end
+      script:
+        - gradle check --info
+        - gradle jacocoTestReport coveralls
     - language: node_js
-        node_js:
-          - "node"
-        cache:
-          directories:
-            - "node_modules"        
-        before_script:
-          - cd front-end
-          - npm install
-        script:
-          - npm test -- --coverage --verbose
-        after_script:
-          - npm run coveralls
+      node_js:
+        - "node"
+      cache:
+        directories:
+          - "node_modules"
+      before_script:
+        - cd front-end
+        - npm install
+      script:
+        - npm test -- --coverage --verbose
+      after_script:
+        - npm run coveralls
