@@ -5,9 +5,11 @@ class Welcome extends React.Component {
   render() {
     return (
       <div>
-        <div>Welcome</div>
+        <h1>Welcome</h1>
         <p />
-        <Link to="/tictactoe">Tic Tic Toe</Link>
+        <Link to="/tictactoe">
+          <h2>Tic Tic Toe</h2>
+        </Link>
       </div>
     );
   }

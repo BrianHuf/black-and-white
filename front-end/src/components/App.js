@@ -1,15 +1,18 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Router, Route, Link } from "react-router-dom";
 
-import TicTacToe from "./tictactoe/";
+import history from "../history";
+import TicTacToe from "./games/TicTacToe";
 import Welcome from "./Welcome";
 import "./App.css";
 
 const App = () => {
   return (
-    <Router>
+    <Router history={history}>
       <div>
-        <Link to="/">Home</Link>
+        <Link to="/">
+          <h2>Home</h2>
+        </Link>
         <div className="App">
           <Route exact path="/" component={Welcome} />
           <Route path="/tictactoe" component={TicTacToe} />

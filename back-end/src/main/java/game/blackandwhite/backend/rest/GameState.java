@@ -8,24 +8,24 @@ import game.blackandwhite.backend.core.Game;
 import game.blackandwhite.backend.core.Move;
 
 public class GameState {
-    private final String board;
+    private final String state;
     private final String status;
     private final String lastMove;
     private final List<String> nextMoves;
 
     public GameState(Game game) {
-        this.board = game.getLastMove().getBoard();
+        this.state = game.getLastMove().getBoard();
         this.status = game.getLastMove().getStatus().toString();
         this.lastMove = game.getLastMove().getMoveString();
         this.nextMoves = new ArrayList<>();
 
         for (Move move : game.getLastMove().getNextMoves()) {
-            nextMoves.add(move.toString());
+            nextMoves.add(move.getMoveString());
         }
     }
 
     public String getState() {
-        return board;
+        return state;
     }
 
     public String getStatus() {

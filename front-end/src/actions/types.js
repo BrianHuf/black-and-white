@@ -1,0 +1,2 @@
+export const FETCH_GAME_STATE = "FETCH_GAME_STATE";
+export const SELECT_MOVE = "SELECT_MOVE";
