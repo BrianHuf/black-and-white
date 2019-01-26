@@ -9,8 +9,9 @@ class TicTacToe extends React.Component {
   CONFIG_CELL = {
     X: <image xlinkHref="/images/p1.svg" />,
     O: <image xlinkHref="/images/p2.svg" />,
-    _: <image xlinkHref="/images/selectable.svg" />,
-    s: <image xlinkHref="/images/selected.svg" />
+    m: <image xlinkHref="/images/selectable.svg" />,
+    s: <image xlinkHref="/images/selected.svg" />,
+    _: <div />
   };
 
   componentDidMount() {
@@ -18,22 +19,40 @@ class TicTacToe extends React.Component {
   }
 
   getPlayedMoves() {
-    const path = this.props.history.location.pathname;
-    const playedMoves = path
-      .replace("/tictactoe/", "")
-      .replace("/tictactoe", "");
-    console.log("palyed moves", playedMoves);
-    return playedMoves;
+    const played = this.props.match.params.playedMoves;
+    return played !== ":new" ? played : "";
   }
 
-  getCell(value, index) {
+  getPrompt() {
+    switch (this.props.status) {
+      case "IN_PROGRESS":
+        return this.getPlayer();
+      case "TIE":
+        return "Tie Game";
+      default:
+        return this.getPlayer() + " Wins";
+    }
+  }
+
+  getPlayer() {
+    switch (this.props.nextPlayer) {
+      case "X":
+        return "Player 1";
+      case "O":
+        return "Player 2";
+      default:
+        return "Nobody";
+    }
+  }
+
+  renderCell(value, index) {
     let x = Math.floor(index / 3);
     let y = index % 3;
 
     let clickIndex = index;
     if (index === this.props.selected) {
       value = "s";
-    } else if (value !== "_") {
+    } else if (value !== "m") {
       clickIndex = -1;
     }
 
@@ -51,9 +70,13 @@ class TicTacToe extends React.Component {
   }
 
   onClickCell(event, index) {
+    if (index < 0) {
+      return;
+    }
+
     if (index === this.props.selected) {
       const newMoves = this.getPlayedMoves() + index;
-      const nextUrl = "/tictactoe/" + newMoves;
+      const nextUrl = "/game/tictactoe/" + newMoves;
       this.props.history.push(nextUrl);
       this.props.fetchGameState("tictactoe", newMoves);
     } else {
@@ -62,16 +85,28 @@ class TicTacToe extends React.Component {
   }
 
   render() {
-    console.log("TicTacToe.js/render()", this.props);
     const board = this.props.board;
-    if (board) {
-      const cells = [...board].map((value, index) =>
-        this.getCell(value, index)
-      );
-      return <div className="tic-tac-toe square">{cells}</div>;
-    } else {
+    if (!board) {
       return <div>Loading...</div>;
     }
+
+    let boardArray = [...board];
+    if (this.props.availableMoves) {
+      this.props.availableMoves.map(index => (boardArray[index] = "m"));
+    }
+
+    const cells = boardArray.map((value, index) =>
+      this.renderCell(value, index)
+    );
+
+    return (
+      <div className="tic-tac-toe">
+        <div className="tic-tac-toe-board square">{cells}</div>
+        <div>
+          <h2 className="ui center aligned header">{this.getPrompt()}</h2>
+        </div>
+      </div>
+    );
   }
 }
 
@@ -79,9 +114,11 @@ const mapStateToProps = state => {
   console.log("mapStateToProps", state.game);
 
   return {
+    availableMoves: state.game.availableMoves,
     board: state.game.gameState,
-    moves: state.game.moves,
-    selected: state.game.selected
+    nextPlayer: state.game.nextPlayer,
+    selected: state.game.selected,
+    status: state.game.status
   };
 };
 

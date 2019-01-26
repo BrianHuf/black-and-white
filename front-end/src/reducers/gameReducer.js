@@ -12,8 +12,10 @@ export default (state = INTIAL_STATE, action) => {
       return {
         ...state,
         gameState: action.payload.state,
-        moves: action.payload.moves,
-        selected: null
+        availableMoves: action.payload.availableMoves,
+        nextPlayer: action.payload.nextPlayer,
+        selected: null,
+        status: action.payload.status
       };
     case SELECT_MOVE:
       return {

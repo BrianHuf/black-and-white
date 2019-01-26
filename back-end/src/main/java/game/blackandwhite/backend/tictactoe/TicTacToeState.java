@@ -35,6 +35,10 @@ public class TicTacToeState {
     }
 
     private Status calcStatus() {
+        if (move.getMoveNumber() < 5) {
+            return Status.IN_PROGRESS;
+        }
+
         int lookFor = move.getPlayer().getIndex();
         if (check(lookFor, 0) && (check(lookFor, 1, 2) || check(lookFor, 3, 6) || check(lookFor, 4, 8))) {
             return Status.WINNER;
@@ -80,6 +84,10 @@ public class TicTacToeState {
     }
 
     public Move[] calcNextMoves() {
+        if (this.getStatus().isGameOver()) {
+            return new Move[] {};
+        }
+
         List<Move> moves = new ArrayList<>(9);
         for (int i = 0; i < 9; i++) {
             checkToAddMove(moves, i);

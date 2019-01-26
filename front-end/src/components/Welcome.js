@@ -7,7 +7,7 @@ class Welcome extends React.Component {
       <div>
         <h1>Welcome</h1>
         <p />
-        <Link to="/tictactoe">
+        <Link to="/game/tictactoe/:new">
           <h2>Tic Tic Toe</h2>
         </Link>
       </div>

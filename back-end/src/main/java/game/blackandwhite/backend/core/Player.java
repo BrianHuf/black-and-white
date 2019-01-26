@@ -16,7 +16,7 @@ public enum Player {
         return token.toString();
     }
 
-	public int getIndex() {
-		return index;
-	}
+    public int getIndex() {
+        return index;
+    }
 }

@@ -15,7 +15,11 @@ const App = () => {
         </Link>
         <div className="App">
           <Route exact path="/" component={Welcome} />
-          <Route path="/tictactoe" component={TicTacToe} />
+          <Route
+            exact
+            path="/game/tictactoe/:playedMoves"
+            component={TicTacToe}
+          />
         </div>
       </div>
     </Router>

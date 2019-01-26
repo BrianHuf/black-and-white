@@ -1,4 +1,4 @@
-.tic-tac-toe {
+.tic-tac-toe-board {
   display: grid;
   grid-template-columns: 33% 33% 34%;
   background: gray;
@@ -7,5 +7,5 @@
 .tic-tac-toe-cell {
   border: 1px solid black;
   text-align: center;
-  padding: 15%
+  padding: 15%;
 }
