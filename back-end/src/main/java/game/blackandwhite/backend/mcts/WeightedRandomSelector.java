@@ -1,6 +1,6 @@
 package game.blackandwhite.backend.mcts;
 
-import java.util.List;
+import java.util.Collection;
 
 public class WeightedRandomSelector<T> {
     final Class<T> tClass = null;
@@ -8,30 +8,34 @@ public class WeightedRandomSelector<T> {
     final float[] weights;
     final float total;
 
-    WeightedRandomSelector(List<T> list, WeightGetter<T> weightGetter) {
+    WeightedRandomSelector(Collection<T> list, WeightGetter<T> weightGetter) {
         objects = toArray(list);
         weights = new float[list.size()];
         total = populateWeights(list, weightGetter);
     }
 
-    private static <T> T[] toArray(List<T> list) {
+    private static <T> T[] toArray(Collection<T> list) {
         @SuppressWarnings("unchecked")
         T[] ret = (T[]) list.toArray(new Object[list.size()]);
         return ret;
     }
 
-    public static <T> T weightedSelect(List<T> items, WeightGetter<T> computer) {
+    public static <T> T weightedSelect(Collection<T> items, WeightGetter<T> computer) {
         WeightedRandomSelector<T> selector = new WeightedRandomSelector<T>(items, computer);
         return selector.select();
     }
 
-    private float populateWeights(List<T> list, WeightGetter<T> weightGetter) {
+    private float populateWeights(Collection<T> list, WeightGetter<T> weightGetter) {
         int index = 0;
         float sum = 0;
         for (T item : list) {
             float weight = weightGetter.getWeight(item);
             sum += weight;
             weights[index++] = weight;
+            if (weights.length == index) {
+                // due to concurrency
+                break;
+            }
         }
         return sum;
     }

@@ -2,7 +2,7 @@ Generic Game Interface
 ======================
 
 [plantuml]
-:plantuml-server-url: http://subwcl608.na.mscsoftware.com:8082
+:plantuml-server-url: http://www.plantuml.com/plantuml
 ....
 @startuml
 

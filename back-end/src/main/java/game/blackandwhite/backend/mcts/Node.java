@@ -2,12 +2,12 @@ package game.blackandwhite.backend.mcts;
 
 import game.blackandwhite.backend.core.Move;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 class Node {
     private final Node parent;
-    private final List<Node> children = new ArrayList<>();
+    private final List<Node> children = new CopyOnWriteArrayList<>();
     private final Move move;
     private int visits = 0;
     private float goodness = 0;
@@ -22,9 +22,9 @@ class Node {
     }
 
     private Node(Node parent, Move move) {
-        parent.children.add(this);
         this.parent = parent;
         this.move = move;
+        parent.children.add(this);
     }
 
     public Node getFirstLevel() {
@@ -33,7 +33,7 @@ class Node {
         }
 
         Node current = this;
-        while(!current.getParent().isRoot()) {
+        while (!current.getParent().isRoot()) {
             current = current.getParent();
         }
 

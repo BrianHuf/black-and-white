@@ -6,7 +6,6 @@ import java.util.List;
 
 import game.blackandwhite.backend.core.Game;
 import game.blackandwhite.backend.core.Move;
-import game.blackandwhite.backend.core.Player;
 
 public class GameState {
     private final String state;

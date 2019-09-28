@@ -1,6 +1,6 @@
 package game.blackandwhite.backend.mcts;
 
-import java.util.List;
+import java.util.Collection;
 
 import game.blackandwhite.backend.core.AI;
 import game.blackandwhite.backend.core.Move;
@@ -15,7 +15,7 @@ public class Mcts implements AI {
     private Node root;
 
     public Mcts(long numFixedIterations) {
-        this(new FixedIterations(numFixedIterations), new StandardSelection(), new StandardExpansion(),
+        this(new FixedConcurrentIterations(numFixedIterations), new StandardSelection(), new StandardExpansion(),
                 new StandardSimulator(), new StandardPropagation());
     }
 
@@ -35,7 +35,7 @@ public class Mcts implements AI {
         return selectByMostVisits(root.getChildren()).getMove();
     }
 
-    private Node selectByMostVisits(List<Node> list) {
+    private Node selectByMostVisits(Collection<Node> list) {
         int maxVisits = 0;
         Node maxNode = null;
         for (Node check : list) {

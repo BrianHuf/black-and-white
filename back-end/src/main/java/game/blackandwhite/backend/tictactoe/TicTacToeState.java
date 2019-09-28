@@ -75,7 +75,7 @@ public class TicTacToeState {
         return lookFor == board[index1] && lookFor == board[index2] && lookFor == board[index3];
     }
 
-    synchronized public Move[] getNextMoves() {
+    public Move[] getNextMoves() {
         if (nextMoves == null) {
             nextMoves = calcNextMoves();
         }

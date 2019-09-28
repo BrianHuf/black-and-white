@@ -12,7 +12,7 @@ This is a side-project primarily for learning
 
 Initial check-in. Nothing play-able at the moment
 
-## Technology
+## Technology (planned)
 
 - **Javacsript React** for front end
 - **Java Spring** for back end
