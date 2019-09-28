@@ -9,8 +9,25 @@ Abstract strategy board games. Emphasis is on playing against computer and learn
 This is a side-project primarily for learning
 
 ## Status
+- Back end - Multithreaded MCTS is working.  No AI yet
+- Front end - Tic Toe Toe working.  Not connected to MCTS
 
-Initial check-in. Nothing play-able at the moment
+## Next Steps
+- Connect MCTS back end to Tic-Tac-Toe front end
+- Provide visual representation of MCTS tree
+- Create Siam game
+
+
+## To Play
+Shell #1
+```bash
+gradle startBackEnd
+```
+
+Shell #2
+```bash
+gradle npmInstall startFrontEnd
+```
 
 ## Technology (planned)
 
@@ -18,11 +35,6 @@ Initial check-in. Nothing play-able at the moment
 - **Java Spring** for back end
 - Multi-threaded **MCTS** augmented with ML (probably **Deeplearning4j** or **Keras**)
 
-## Next Steps
-
-- Focus on getting Tic-Tac-Toe working and playable
-- Provide visual representation of MCTS tree
-- Create Siam game
 
 ## License
 

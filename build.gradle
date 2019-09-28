@@ -1,10 +1,1 @@
-
-// inspired from https://github.com/xword/java-npm-gradle-integration-example
-
 defaultTasks 'build'
-
-wrapper {
-    description "Regenerates the Gradle Wrapper files"
-    gradleVersion = '5.0'
-    distributionUrl = "http://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
-}

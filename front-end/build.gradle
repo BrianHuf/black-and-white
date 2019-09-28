@@ -11,3 +11,9 @@ node {
 task test(type: NpmTask) {
     args = ['test', '--', '--coverage']
 }
+
+task startFrontEnd(type: NpmTask) {
+    group = "Application"
+    description = "Starts front end"
+    args = ['start']
+}
