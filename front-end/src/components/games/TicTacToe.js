@@ -3,20 +3,21 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchGameState, selectMove } from "../../actions";
 
+import imagePlayer1 from "./images/p1.svg"
+import imagePlayer2 from "./images/p2.svg"
+import imageSelectable from "./images/selectable.svg"
+import imageSelected from "./images/selected.svg"
 import "./TicTacToe.css";
 
-class TicTacToe extends React.Component {
+
+export class PureTicTacToe extends React.Component {
   CONFIG_CELL = {
-    X: <image xlinkHref="/images/p1.svg" />,
-    O: <image xlinkHref="/images/p2.svg" />,
-    m: <image xlinkHref="/images/selectable.svg" />,
-    s: <image xlinkHref="/images/selected.svg" />,
+    X: <image xlinkHref={imagePlayer1} />,
+    O: <image xlinkHref={imagePlayer2} />,
+    m: <image xlinkHref={imageSelectable} />,
+    s: <image xlinkHref={imageSelected} />,
     _: <div />
   };
-
-  componentDidMount() {
-    this.props.fetchGameState("tictactoe", this.getPlayedMoves());
-  }
 
   getPlayedMoves() {
     const played = this.props.match.params.playedMoves;
@@ -49,9 +50,15 @@ class TicTacToe extends React.Component {
     let x = Math.floor(index / 3);
     let y = index % 3;
 
+    let images = []
+    if (value != "_") {
+      images.push(this.CONFIG_CELL[value])
+    }
+
     let clickIndex = index;
-    if (index === this.props.selected) {
-      value = "s";
+    if (index == this.props.selected) {
+      console.error("XXX")
+      images.push(this.CONFIG_CELL["s"])
     } else if (value !== "m") {
       clickIndex = -1;
     }
@@ -64,24 +71,12 @@ class TicTacToe extends React.Component {
         celly={y}
         key={index}
       >
-        <svg viewBox="0 0 500 500">{this.CONFIG_CELL[value]}</svg>
+      <svg viewBox="0 0 500 500">
+        {images}
+      </svg>
+        
       </div>
     );
-  }
-
-  onClickCell(event, index) {
-    if (index < 0) {
-      return;
-    }
-
-    if (index === this.props.selected) {
-      const newMoves = this.getPlayedMoves() + index;
-      const nextUrl = "/game/tictactoe/" + newMoves;
-      this.props.history.push(nextUrl);
-      this.props.fetchGameState("tictactoe", newMoves);
-    } else {
-      this.props.selectMove(index);
-    }
   }
 
   render() {
@@ -108,6 +103,37 @@ class TicTacToe extends React.Component {
       </div>
     );
   }
+
+  onClickCell(event, index) {
+    // to override
+  }
+}
+
+
+class TicTacToe extends PureTicTacToe {
+  componentDidMount() {
+    console.log("componentDidMount " + this.props.board)
+    if (!this.props.board) {
+      this.props.fetchGameState("tictactoe", this.getPlayedMoves());
+    }
+  }
+
+  onClickCell(event, index) {
+    if (index < 0) {
+      return;
+    }
+
+    console.dir(this.props)
+
+    if (index === this.props.selected) {
+      const newMoves = this.getPlayedMoves() + index;
+      const nextUrl = "/game/tictactoe/" + newMoves;
+      this.props.history.push(nextUrl);
+      this.props.fetchGameState("tictactoe", newMoves);
+    } else {
+      this.playMove(index)
+    }
+  }
 }
 
 const mapStateToProps = state => {
@@ -128,3 +154,4 @@ export default withRouter(
     { fetchGameState, selectMove }
   )(TicTacToe)
 );
+

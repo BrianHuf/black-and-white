@@ -18,7 +18,8 @@
     "test": "react-scripts test",
     "coverage": "react-scripts test --coverage",
     "coveralls": "cat ./coverage/lcov.info | node ./node_modules/.bin/coveralls",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -31,6 +32,7 @@
   ],
   "jest": {},
   "devDependencies": {
+    "@storybook/react": "^5.2.1",
     "coveralls": "^3.0.2",
     "jest": "^23.6.0"
   }
