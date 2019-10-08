@@ -8,6 +8,7 @@ import store from '../../configureStore.js'
 
 import { PureTicTacToe } from './TicTacToe.js';
 import '../App.css'
+import "./SplitPane.css"
 
 export const ticTacToe = {
     id: '1',

@@ -154,4 +154,3 @@ export default withRouter(
     { fetchGameState, selectMove }
   )(TicTacToe)
 );
-
