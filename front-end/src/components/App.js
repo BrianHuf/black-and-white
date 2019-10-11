@@ -2,7 +2,7 @@ import React from "react";
 import { Router, Route, Link } from "react-router-dom";
 
 import history from "../history";
-import TicTacToe from "./games/TicTacToe";
+import TicTacToeLayout from "./games/TicTacToeLayout";
 import Welcome from "./Welcome";
 import "./App.css";
 
@@ -18,7 +18,7 @@ const App = () => {
           <Route
             exact
             path="/game/tictactoe/:playedMoves"
-            component={TicTacToe}
+            component={TicTacToeLayout}
           />
         </div>
       </div>

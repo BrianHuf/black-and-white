@@ -1,7 +1,4 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { fetchGameState, selectMove } from "../../actions";
 
 import imagePlayer1 from "./images/p1.svg"
 import imagePlayer2 from "./images/p2.svg"
@@ -10,7 +7,7 @@ import imageSelected from "./images/selected.svg"
 import "./TicTacToe.css";
 
 
-export class PureTicTacToe extends React.Component {
+export default class TicTacToe extends React.Component {
   CONFIG_CELL = {
     X: <image xlinkHref={imagePlayer1} />,
     O: <image xlinkHref={imagePlayer2} />,
@@ -51,12 +48,12 @@ export class PureTicTacToe extends React.Component {
     let y = index % 3;
 
     let images = []
-    if (value != "_") {
+    if (value !== "_") {
       images.push(this.CONFIG_CELL[value])
     }
 
     let clickIndex = index;
-    if (index == this.props.selected) {
+    if (index === this.props.selected) {
       console.error("XXX")
       images.push(this.CONFIG_CELL["s"])
     } else if (value !== "m") {
@@ -96,9 +93,11 @@ export class PureTicTacToe extends React.Component {
 
     return (
       <div className="tic-tac-toe">
-        <div className="tic-tac-toe-board square">{cells}</div>
-        <div>
-          <h2 className="ui center aligned header">{this.getPrompt()}</h2>
+        <div className="tic-tac-toe-board square">
+          {cells}
+        </div>
+        <div className="tic-tac-toe-message">
+          <p>{this.getPrompt()}</p>
         </div>
       </div>
     );
@@ -108,49 +107,3 @@ export class PureTicTacToe extends React.Component {
     // to override
   }
 }
-
-
-class TicTacToe extends PureTicTacToe {
-  componentDidMount() {
-    console.log("componentDidMount " + this.props.board)
-    if (!this.props.board) {
-      this.props.fetchGameState("tictactoe", this.getPlayedMoves());
-    }
-  }
-
-  onClickCell(event, index) {
-    if (index < 0) {
-      return;
-    }
-
-    console.dir(this.props)
-
-    if (index === this.props.selected) {
-      const newMoves = this.getPlayedMoves() + index;
-      const nextUrl = "/game/tictactoe/" + newMoves;
-      this.props.history.push(nextUrl);
-      this.props.fetchGameState("tictactoe", newMoves);
-    } else {
-      this.playMove(index)
-    }
-  }
-}
-
-const mapStateToProps = state => {
-  console.log("mapStateToProps", state.game);
-
-  return {
-    availableMoves: state.game.availableMoves,
-    board: state.game.gameState,
-    nextPlayer: state.game.nextPlayer,
-    selected: state.game.selected,
-    status: state.game.status
-  };
-};
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    { fetchGameState, selectMove }
-  )(TicTacToe)
-);
