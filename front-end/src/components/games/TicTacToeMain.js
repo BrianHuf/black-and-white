@@ -23,6 +23,17 @@ class TicTacToeMain extends TicTacToe {
       this.props.selectMove(index)
     }
   }
+
+  getPrompt() {
+    switch (this.props.status) {
+      case "IN_PROGRESS":
+        return this.getPlayer();
+      case "TIE":
+        return "Tie Game";
+      default:
+        return this.getPlayer() + " Wins";
+    }
+  }
 }
 
 const mapStateToProps = state => {

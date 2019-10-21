@@ -4,17 +4,6 @@
   background: gray;
 }
 
-.center-container-1 {
-  text-align: center;
-}
-
-.center-container-2 {
-  display: inline-block;
-  width: 40%;
-  padding-top: 2em;
-  padding-bottom: 10em;
-}
-
 .tic-tac-toe-cell {
   border: 1px solid black;
   text-align: center;
@@ -22,11 +11,13 @@
 }
 
 .tic-tac-toe-message {
-  padding: 2vw;
+  padding-bottom: 1em;
 }
 
 .tic-tac-toe-play {
-  font-size: 3em
+  font-size: 3em;
+  padding-left: 30%;
+  padding-right: 30%;
 }
 
 .tic-tac-toe-mcts {

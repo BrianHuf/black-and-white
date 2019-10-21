@@ -10,7 +10,7 @@ class StandardSimulator implements Simulator {
     private static float TIE = 0.0f;
 
     @Override
-    public float playout(Node node) {
+    public float playout(MctsNode node) {
         Move startingMove = node.getMove();
         Player startingPlayer = startingMove.getPlayer();
         Move finalMove = playout(startingMove);

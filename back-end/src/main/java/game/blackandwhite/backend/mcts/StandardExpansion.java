@@ -1,17 +1,15 @@
 package game.blackandwhite.backend.mcts;
 
-import java.util.List;
-
 import static game.blackandwhite.backend.mcts.RandomSelector.randomSelect;
 
 class StandardExpansion implements Expander {
     @Override
-    public Node expand(Node selected) {
+    public MctsNode expand(MctsNode selected) {
         if (selected.getVisits() == 0 || selected.getMove().getStatus().isGameOver()) {
             return selected;
         }
 
         selected.expand();
-        return randomSelect((List<Node>)selected.getChildren());
+        return randomSelect(selected.getMctsChildren());
     }
 }

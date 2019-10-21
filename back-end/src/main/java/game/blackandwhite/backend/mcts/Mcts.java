@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import game.blackandwhite.backend.core.AI;
 import game.blackandwhite.backend.core.Move;
+import game.blackandwhite.backend.core.Node;
 
 public class Mcts implements AI {
     private Coordinator coordinator;
@@ -12,7 +13,7 @@ public class Mcts implements AI {
     private Simulator simulator;
     private Propagator propagator;
 
-    private Node root;
+    private MctsNode root;
 
     public Mcts(long numFixedIterations) {
         this(new FixedConcurrentIterations(numFixedIterations), new StandardSelection(), new StandardExpansion(),
@@ -30,27 +31,32 @@ public class Mcts implements AI {
 
     @Override
     public Move findBestMove(Move fromMove) {
-        root = new Node(fromMove);
+        root = new MctsNode(fromMove);
         coordinator.doRounds(this);
-        return selectByMostVisits(root.getChildren()).getMove();
+        return selectByMostVisits(root.getMctsChildren()).getMove();
     }
 
-    private Node selectByMostVisits(Collection<Node> list) {
+    @Override
+    public Node getRootNode() {
+        return root;
+    }
+
+    private MctsNode selectByMostVisits(Collection<MctsNode> list) {
         int maxVisits = 0;
-        Node maxNode = null;
-        for (Node check : list) {
+        MctsNode maxNode = null;
+        for (MctsNode check : list) {
             if (check.getVisits() > maxVisits) {
                 maxNode = check;
                 maxVisits = check.getVisits();
             }
         }
-        
+
         return maxNode;
     }
 
     void doOneRound() {
-        Node selected = selector.select(root);
-        Node simulateThis = expander.expand(selected);
+        MctsNode selected = selector.select(root);
+        MctsNode simulateThis = expander.expand(selected);
         float goodness = simulator.playout(simulateThis);
         propagator.backPropagate(simulateThis, goodness);
     }
@@ -60,6 +66,6 @@ public class Mcts implements AI {
             return "MCTS not initialized";
         }
 
-        return String.format("Root = %s, Best = %s", root.toString(), selectByMostVisits(root.getChildren()));
+        return String.format("Root = %s, Best = %s", root.toString(), selectByMostVisits(root.getMctsChildren()));
     }
 }

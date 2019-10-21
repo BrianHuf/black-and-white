@@ -14,7 +14,9 @@ const App = () => {
           <h2>Home</h2>
         </Link>
         <div className="App">
-          <Route exact path="/" component={Welcome} />
+          <div className="game-select">
+            <Route exact path="/" component={Welcome} />
+          </div>
           <Route
             exact
             path="/game/tictactoe/:playedMoves"

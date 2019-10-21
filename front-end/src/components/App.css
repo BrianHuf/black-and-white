@@ -1,7 +1,7 @@
 .App {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 2em;
+  bottom: 2em;
   left: 0;
   right: 0;
 
@@ -14,6 +14,22 @@
   -ms-user-select: none; /* IE10+ */
 }
 
+.vertical {
+  text-align: center;
+}
+
+.game-select {
+  text-align: center;
+}
+
+.centered {  
+  display: inline-block;
+  width: 40%;
+  padding-top: 1em;
+  padding-bottom: 10em;
+}
+
 .game {
+  text-align: center;
   background: darkslategray;
 }

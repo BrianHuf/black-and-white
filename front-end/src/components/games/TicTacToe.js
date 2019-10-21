@@ -22,25 +22,11 @@ export default class TicTacToe extends React.Component {
   }
 
   getPrompt() {
-    switch (this.props.status) {
-      case "IN_PROGRESS":
-        return this.getPlayer();
-      case "TIE":
-        return "Tie Game";
-      default:
-        return this.getPlayer() + " Wins";
-    }
+    return this.props.status;
   }
 
   getPlayer() {
-    switch (this.props.nextPlayer) {
-      case "X":
-        return "Player 1";
-      case "O":
-        return "Player 2";
-      default:
-        return "Nobody";
-    }
+    return this.props.nextPlayer;
   }
 
   renderCell(value, index) {
@@ -54,7 +40,6 @@ export default class TicTacToe extends React.Component {
 
     let clickIndex = index;
     if (index === this.props.selected) {
-      console.error("XXX")
       images.push(this.CONFIG_CELL["s"])
     } else if (value !== "m") {
       clickIndex = -1;

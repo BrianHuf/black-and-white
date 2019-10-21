@@ -1,5 +1,7 @@
 package game.blackandwhite.backend.core;
 
 public interface AI {
-    Move findBestMove(Move lastMove);
+    public Move findBestMove(Move lastMove);
+    
+    public Node getRootNode();
 }

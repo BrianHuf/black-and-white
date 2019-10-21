@@ -2,24 +2,25 @@ package game.blackandwhite.backend.mcts;
 
 import static game.blackandwhite.backend.mcts.WeightedRandomSelector.weightedSelect;
 
-class StandardSelection implements Selector, WeightGetter<Node> {
+class StandardSelection implements Selector, WeightGetter<MctsNode> {
     private static float C = (float) Math.sqrt(2);
 
     @Override
-    public Node select(Node root) {
-        Node current = root;
+    public MctsNode select(MctsNode root) {
+        MctsNode current = root;
         while (current.hasChildren()) {
             current = pickChild(current);
         }
+        
         return current;
     }
 
-    private Node pickChild(Node current) {
-        return weightedSelect(current.getChildren(), this);
+    private MctsNode pickChild(MctsNode current) {
+        return weightedSelect(current.getMctsChildren(), this);
     }
 
     @Override
-    public float getWeight(Node node) {
+    public float getWeight(MctsNode node) {
         // FIXME +1.0f -- is this really correct?
         float wi = node.getGoodness();
         float ni = node.getVisits() + 1.0f;

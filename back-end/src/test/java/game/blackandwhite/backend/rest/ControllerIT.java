@@ -26,8 +26,7 @@ public class ControllerIT {
     private MockMvc mvc;
 
     @Test
-    public void test() throws Exception {
-        System.out.println("Hello world");
+    public void testMovesToState() throws Exception {
         final String url = "/api/v1/movesToState?game=tictactoe&moves=012";
 
         ResultActions a = mvc.perform(get(url).contentType(MediaType.APPLICATION_JSON));
@@ -35,4 +34,15 @@ public class ControllerIT {
         a.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
         a.andExpect(jsonPath("state", is("XOX______")));
     }
+
+    @Test
+    public void testMovesTree() throws Exception {
+        final String url = "/api/v1/movesTree?game=tictactoe&moves=012&depth=2";
+
+        ResultActions a = mvc.perform(get(url).contentType(MediaType.APPLICATION_JSON));
+        a.andExpect(status().isOk());
+        a.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+        a.andExpect(jsonPath("visits", is(1000)));
+    }
+
 }

@@ -17,6 +17,10 @@ public class TicTacToe implements Game {
 
     private void playMoves(String moves) {
         for (byte moveChar : moves.getBytes()) {
+            int cell = moveChar - 48;
+            if (cell < 0 || cell > 8) {
+                throw new IllegalStateException("bad moves char " + moveChar + " " + moves);
+            }
             playMoveChar(moveChar - 48);
         }
     }

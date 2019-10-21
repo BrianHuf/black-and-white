@@ -96,4 +96,32 @@ public class TicTacToeMove implements Move {
             return String.format("%s%d -- %s", getPlayer(), cell, getBoard());
         }
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + cell;
+        result = prime * result + ((previous == null) ? 0 : previous.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        TicTacToeMove other = (TicTacToeMove) obj;
+        if (cell != other.cell)
+            return false;
+        if (previous == null) {
+            if (other.previous != null)
+                return false;
+        } else if (!previous.equals(other.previous))
+            return false;
+        return true;
+    }
 }
