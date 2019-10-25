@@ -1,2 +1,3 @@
 export const FETCH_GAME_STATE = "FETCH_GAME_STATE";
+export const FETCH_MOVES_TREE = "FETCH_MOVES_TREE";
 export const SELECT_MOVE = "SELECT_MOVE";

@@ -1,21 +1,13 @@
 import React from "react";
 
-import imagePlayer1 from "./images/p1.svg"
-import imagePlayer2 from "./images/p2.svg"
-import imageSelectable from "./images/selectable.svg"
-import imageSelected from "./images/selected.svg"
+import imagePlayer1 from "../images/p1.svg"
+import imagePlayer2 from "../images/p2.svg"
+import imageSelectable from "../images/selectable.svg"
+import imageSelected from "../images/selected.svg"
 import "./TicTacToe.css";
 
 
 export default class TicTacToe extends React.Component {
-  CONFIG_CELL = {
-    X: <image xlinkHref={imagePlayer1} />,
-    O: <image xlinkHref={imagePlayer2} />,
-    m: <image xlinkHref={imageSelectable} />,
-    s: <image xlinkHref={imageSelected} />,
-    _: <div />
-  };
-
   getPlayedMoves() {
     const played = this.props.match.params.playedMoves;
     return played !== ":new" ? played : "";
@@ -34,13 +26,14 @@ export default class TicTacToe extends React.Component {
     let y = index % 3;
 
     let images = []
+
     if (value !== "_") {
-      images.push(this.CONFIG_CELL[value])
+      images.push(this.getImage(value, images))
     }
 
     let clickIndex = index;
     if (index === this.props.selected) {
-      images.push(this.CONFIG_CELL["s"])
+      images.push(this.getImage("s", index))
     } else if (value !== "m") {
       clickIndex = -1;
     }
@@ -53,12 +46,22 @@ export default class TicTacToe extends React.Component {
         celly={y}
         key={index}
       >
-      <svg viewBox="0 0 500 500">
-        {images}
-      </svg>
-        
+        <svg viewBox="0 0 500 500">
+          {images}
+        </svg>
+
       </div>
     );
+  }
+
+  getImage(value, index) {
+    switch (value) {
+      case 'X': return <image key={index} xlinkHref={imagePlayer1} />;
+      case 'O': return <image key={index} xlinkHref={imagePlayer2} />;
+      case 'm': return <image key={index} xlinkHref={imageSelectable} />;
+      case 's': return <image key={index} xlinkHref={imageSelected} />;
+      default: return <div key={index} />
+    }
   }
 
   render() {
@@ -82,7 +85,7 @@ export default class TicTacToe extends React.Component {
           {cells}
         </div>
         <div className="tic-tac-toe-message">
-          <p>{this.getPrompt()}</p>
+          {this.getPrompt()}
         </div>
       </div>
     );

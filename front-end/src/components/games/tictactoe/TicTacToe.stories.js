@@ -3,8 +3,8 @@ import { BrowserRouter } from "react-router-dom";
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import ProviderWrapper from '../Provider.js'
-import store from '../../configureStore.js'
+import ProviderWrapper from '../../Provider.js'
+import store from '../../../configureStore.js'
 
 import { PureTicTacToe } from './TicTacToe.js';
 import '../App.css'

@@ -2,7 +2,7 @@ import React from "react";
 import { Router, Route, Link } from "react-router-dom";
 
 import history from "../history";
-import TicTacToeLayout from "./games/TicTacToeLayout";
+import TicTacToeLayout from "./games/tictactoe/TicTacToeLayout";
 import Welcome from "./Welcome";
 import "./App.css";
 

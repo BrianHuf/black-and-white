@@ -1,9 +1,9 @@
 import React from "react";
 import SplitPane from "react-split-pane"
 
-import TicTacToe from "./TicTacToe"
 import TicTacToeMain from "./TicTacToeMain"
-import "./SplitPane.css"
+import TicTacToeTree from "./TicTacToeTree"
+import "../SplitPane.css"
 
 class TicTacToeLayout extends React.Component {
   render() {
@@ -13,15 +13,7 @@ class TicTacToeLayout extends React.Component {
           <TicTacToeMain/>
         </div>
         <div className="tic-tac-toe-mcts centered">
-            <div>
-                <TicTacToe
-                  board="_XO______"
-                  nextPlayer="X"
-                  availableMoves={[]}
-                  selected="1"
-                  status="&lt;&lt;&lt; Player 1 56% &gt;&gt;&gt; " 
-                />
-            </div>
+            <TicTacToeTree/>
         </div>
       </SplitPane>
     );

@@ -48,7 +48,7 @@ public class TicTacToeState {
             return Status.WINNER;
         }
 
-        if (check(lookFor, 4) && (check(lookFor, 1, 4) || check(lookFor, 3, 5))) {
+        if (check(lookFor, 4) && (check(lookFor, 1, 7) || check(lookFor, 3, 5))) {
             return Status.WINNER;
         }
 

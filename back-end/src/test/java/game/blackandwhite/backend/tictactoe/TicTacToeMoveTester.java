@@ -1,10 +1,11 @@
 package game.blackandwhite.backend.tictactoe;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
 import game.blackandwhite.backend.core.Status;
 
 public class TicTacToeMoveTester {
@@ -29,6 +30,17 @@ public class TicTacToeMoveTester {
         TicTacToe game = new TicTacToe("021354687");
         TicTacToeMove move = game.getLastTicTacToeMove();
         assertEquals(Status.TIE, move.getStatus());
+    }
+
+    @Test
+    public void getStatusInProgress() {
+        final String[] inProgress = { "42051" };
+
+        for (String gameStr : inProgress) {
+            TicTacToe game = new TicTacToe(gameStr);
+            TicTacToeMove move = game.getLastTicTacToeMove();
+            assertEquals("Game still in progress " + gameStr, Status.IN_PROGRESS, move.getStatus());
+        }
     }
 
     @Test

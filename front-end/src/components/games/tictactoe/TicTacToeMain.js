@@ -1,6 +1,6 @@
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchGameState, selectMove } from "../../actions";
+import { fetchGameState, fetchMovesTree, selectMove } from "../../../actions";
 
 import TicTacToe from "./TicTacToe"
 
@@ -19,6 +19,7 @@ class TicTacToeMain extends TicTacToe {
       const nextUrl = "/game/tictactoe/" + newMoves;
       this.props.history.push(nextUrl);
       this.props.fetchGameState("tictactoe", newMoves);
+      this.props.fetchMovesTree("tictactoe", newMoves)
     } else {
       this.props.selectMove(index)
     }
@@ -27,7 +28,7 @@ class TicTacToeMain extends TicTacToe {
   getPrompt() {
     switch (this.props.status) {
       case "IN_PROGRESS":
-        return this.getPlayer();
+        return `${this.getPlayer() === "X" ? "Black" : "White"}'s turn`;
       case "TIE":
         return "Tie Game";
       default:
@@ -51,6 +52,6 @@ const mapStateToProps = state => {
 export default withRouter(
   connect(
     mapStateToProps,
-    { fetchGameState, selectMove }
+    { fetchGameState, fetchMovesTree, selectMove }
   )(TicTacToeMain)
 );

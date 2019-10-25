@@ -11,8 +11,13 @@ public class NodeState {
     private final int toDepth;
 
     public NodeState(Node node, int toDepth) {
+        int delta = 0;
+        for (Node check = node; check != null; check = check.getParent()) {
+            delta++;
+        }
+
         this.node = node;
-        this.toDepth = toDepth;
+        this.toDepth = toDepth + delta;
     }
 
     public String getMove() {
@@ -31,29 +36,7 @@ public class NodeState {
         return node.getVisits();
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((node == null) ? 0 : node.hashCode());
-        return result;
+    public float getGoodness() {
+        return getVisits() > 0 ? 100.f * node.getGoodness() / (float)node.getVisits() : 0.0f;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        NodeState other = (NodeState) obj;
-        if (node == null) {
-            if (other.node != null)
-                return false;
-        } else if (!node.equals(other.node))
-            return false;
-        return true;
-    }
-
 }
