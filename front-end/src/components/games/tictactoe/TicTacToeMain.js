@@ -6,7 +6,18 @@ import TicTacToe from "./TicTacToe"
 
 class TicTacToeMain extends TicTacToe {
   componentDidMount() {
+    window.addEventListener("popstate", this.loadBoardFromUrl)
+    this.loadBoardFromUrl();
+  }
+
+  componentWillUnmount() {
+    console.error("UNMOUNT")
+    window.removeEventListener("popstate", this.loadBoardFromUrl);
+  }
+
+  loadBoardFromUrl = () => {
     this.props.fetchGameState("tictactoe", this.getPlayedMoves());
+    this.props.fetchMovesTree("tictactoe", this.getPlayedMoves());
   }
 
   onClickCell(event, index) {
