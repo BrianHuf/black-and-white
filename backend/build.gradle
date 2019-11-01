@@ -42,8 +42,8 @@ dependencies {
 }
 
 task copyReact(type: Copy) {
-    // dependsOn(':front-end:build')
-    from '../front-end/build'
+    // dependsOn(':frontend:build')
+    from '../frontend/build'
     into 'build/classes/java/main/static'
 }
 processResources.dependsOn copyReact

@@ -1,4 +1,4 @@
 rootProject.name = 'blank-and-white'
 
-include 'front-end'
-include 'back-end'
+include 'frontend'
+include 'backend'

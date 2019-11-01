@@ -3,4 +3,4 @@
 .vscode
 .project
 node_modules
-front-end/dist
+frontend/dist

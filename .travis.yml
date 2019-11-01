@@ -7,7 +7,7 @@ matrix:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
         - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
       before_script:
-        - cd back-end
+        - cd backend
       script:
         - gradle check --info
         - gradle jacocoTestReport coveralls
@@ -18,7 +18,7 @@ matrix:
         directories:
           - "node_modules"
       before_script:
-        - cd front-end
+        - cd frontend
         - npm install
       script:
         - npm test -- --coverage --verbose

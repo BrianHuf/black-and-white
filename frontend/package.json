@@ -17,6 +17,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:prod": "react-scripts build",
     "test": "react-scripts test",
     "coverage": "react-scripts test --coverage",
     "coveralls": "cat ./coverage/lcov.info | node ./node_modules/.bin/coveralls",
