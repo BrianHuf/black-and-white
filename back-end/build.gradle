@@ -42,8 +42,12 @@ dependencies {
 }
 
 task copyReact(type: Copy) {
-    dependsOn(':front-end:build')
+    // dependsOn(':front-end:build')
     from '../front-end/build'
     into 'build/classes/java/main/static'
 }
 processResources.dependsOn copyReact
+
+task stage(type: Copy) {
+    dependsOn('bootJar')
+}

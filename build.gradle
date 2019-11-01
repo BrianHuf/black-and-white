@@ -1,6 +1,2 @@
 defaultTasks 'build'
 
-
-task stage(type: Copy) {
-    dependsOn(':back-end:bootJar')
-}
