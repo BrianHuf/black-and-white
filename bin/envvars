@@ -1,0 +1,2 @@
+export BACKEND_SOURCE_DIR=back-end
+export FRONTEND_SOURCE_DIR=front-end
