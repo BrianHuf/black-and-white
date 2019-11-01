@@ -37,11 +37,13 @@ jacocoTestReport {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web' 
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-task startBackEnd {
-    group = "Application"
-    description = "Starts back end"
-    dependsOn 'bootRun'
+task copyReact(type: Copy) {
+    dependsOn(':front-end:build')
+    from '../front-end/build'
+    into 'build/classes/java/main/static'
 }
+processResources.dependsOn copyReact

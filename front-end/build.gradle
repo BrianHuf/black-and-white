@@ -8,6 +8,10 @@ node {
     download = false
 }
 
+task build(type: NpmTask) {
+    args = ['run', 'build']
+}
+
 task test(type: NpmTask) {
     args = ['test', '--', '--coverage']
 }
