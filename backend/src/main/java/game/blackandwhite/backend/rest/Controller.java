@@ -25,8 +25,9 @@ public class Controller {
     public NodeState movesTree(
             @RequestParam(value = "game", defaultValue = "tictactoe") String gameType,
             @RequestParam(value = "moves", defaultValue = "") String moves,
-            @RequestParam(value = "depth", defaultValue = "4") Integer depth) {
-        AI ai = new Mcts(1000);
+            @RequestParam(value = "depth", defaultValue = "4") Integer depth,
+            @RequestParam(value = "iterations", defaultValue = "10000") Integer iterations) {
+        AI ai = new Mcts(iterations);
         Game game = GameFactory.create(gameType, moves);
         ai.findBestMove(game.getLastMove());
         return new NodeState(ai.getRootNode(),depth);
